@@ -12,20 +12,21 @@ public class Livro extends Autor{
 
 	public static void CadastrarLivro(Scanner leitor, Livro livro, List<Livro> listaLivros)
 	{
-		System.out.println("Informe o nome do livro:");
-		livro.titulo = leitor.nextLine();
-
-		System.out.println("Informe o nome do autor:");
-		livro.autor.nome = leitor.nextLine();
-
-		System.out.println("Informe o local de nascimento do autor:");
-		livro.autor.localNasc = leitor.nextLine();
-
-		System.out.println("Informe o valor do livro:");
-		livro.preco = leitor.nextFloat();
+		livro.titulo = Utils.InputUsuario("Informe o nome do livro: ", leitor);
+		livro.autor.nome = Utils.InputUsuario("Informe o nome do autor: ", leitor);
+		livro.autor.localNasc = Utils.InputUsuario("Informe o local de nascimento do autor: ", leitor);
+		livro.preco = Utils.InputUsuarioFloat("Informe o valor do livro:", leitor);
+		if (livro.preco == null)
+			return;
 
 		System.out.println("Informe a data de lançamento do livro: (dd/mm/aaaa: ");
-		livro.dataLancamento = LocalDate.parse(leitor.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		try {
+			livro.dataLancamento = LocalDate.parse(leitor.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		} catch (Exception e) {
+			System.out.println("Valor informado precisa ser uma data válida.");
+			leitor.nextLine();
+			return;
+		}
 		leitor.nextLine();
 		if (VerificarTempoLanc(livro.dataLancamento) >= 5)
 		{
