@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,19 +14,12 @@ public class Livro extends Autor{
 		livro.titulo = Utils.InputUsuario("Informe o nome do livro: ", leitor);
 		livro.autor.nome = Utils.InputUsuario("Informe o nome do autor: ", leitor);
 		livro.autor.localNasc = Utils.InputUsuario("Informe o local de nascimento do autor: ", leitor);
-		livro.preco = Utils.InputUsuarioFloat("Informe o valor do livro:", leitor);
+		livro.preco = Utils.InputUsuarioFloat("Informe o valor do livro, separando os centavos por ponto (.): ", leitor);
 		if (livro.preco == null)
 			return;
-
-		System.out.println("Informe a data de lançamento do livro: (dd/mm/aaaa: ");
-		try {
-			livro.dataLancamento = LocalDate.parse(leitor.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-		} catch (Exception e) {
-			System.out.println("Valor informado precisa ser uma data válida.");
-			leitor.nextLine();
+		livro.dataLancamento = Utils.InputUsuarioLocalDate("Informe a data de lançamento do livro: (dd/mm/aaaa): ", leitor);
+		if (livro.dataLancamento == null)
 			return;
-		}
-		leitor.nextLine();
 		if (VerificarTempoLanc(livro.dataLancamento) >= 5)
 		{
 			listaLivros.add(livro);
@@ -56,7 +48,7 @@ public class Livro extends Autor{
 				+ "\nData de nascimento do autor: " + livro.autor.localNasc
 				+ "\nValor :" + livro.preco
 				+ "\nData de lançamento: " + livro.dataLancamento);
-			System.out.println("Aperte ENTER para continuar");
+			System.out.println("\nAperte ENTER para continuar");
 			leitor.nextLine();
 		}
 	}
