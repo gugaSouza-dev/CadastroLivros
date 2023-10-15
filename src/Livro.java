@@ -11,16 +11,16 @@ public class Livro extends Autor{
 
 	public static void CadastrarLivro(Scanner leitor, Livro livro, List<Livro> listaLivros)
 	{
-		livro.titulo = Utils.InputUsuario("Informe o nome do livro: ", leitor);
-		livro.autor.nome = Utils.InputUsuario("Informe o nome do autor: ", leitor);
-		livro.autor.localNasc = Utils.InputUsuario("Informe o local de nascimento do autor: ", leitor);
-		livro.preco = Utils.InputUsuarioFloat("Informe o valor do livro, separando os centavos por ponto (.): ", leitor);
+		livro.titulo = Input.InputUsuario("Informe o nome do livro: ", leitor);
+		livro.autor.nome = Input.InputUsuario("Informe o nome do autor: ", leitor);
+		livro.autor.localNasc = Input.InputUsuario("Informe o local de nascimento do autor: ", leitor);
+		livro.preco = Input.InputUsuarioFloat("Informe o valor do livro, separando os centavos por ponto (.): ", leitor);
 		if (livro.preco == null)
 			return;
-		livro.dataLancamento = Utils.InputUsuarioLocalDate("Informe a data de lançamento do livro: (dd/mm/aaaa): ", leitor);
+		livro.dataLancamento = Input.InputUsuarioLocalDate("Informe a data de lançamento do livro: (dd/mm/aaaa): ", leitor);
 		if (livro.dataLancamento == null)
 			return;
-		if (VerificarTempoLanc(livro.dataLancamento) >= 5)
+		if (VerificarTempoLanc(livro.dataLancamento) > 5)
 		{
 			listaLivros.add(livro);
 			System.out.println("Cadastro realizado!");
@@ -31,7 +31,7 @@ public class Livro extends Autor{
 		Period idade;
 
 		idade = Period.between(dataLancamento, LocalDate.now());
-		if (idade.getYears() < 5)
+		if (idade.getYears() <= 5)
 		{
 			System.out.println("Livro muito novo. Não pode ser cadastrado.");
 			return 0;

@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Utils {
+public class Input {
 	public static String InputUsuario(String mensagem, Scanner leitor)
 	{
 		String input;
