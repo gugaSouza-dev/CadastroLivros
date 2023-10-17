@@ -22,10 +22,7 @@ public class Main {
 					Livro.CadastrarLivro(leitor, livro, listaLivros);
 					break;
 				case "2":
-					if (listaLivros.isEmpty())
-						System.out.println("Lista de livros vazia");
-					else
-						Livro.ListarLivros(leitor, listaLivros);
+					Livro.ListarLivros(leitor, listaLivros);
 					break;
 				default:
 					break;
